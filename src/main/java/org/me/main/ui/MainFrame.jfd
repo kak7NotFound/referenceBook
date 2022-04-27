@@ -12,6 +12,10 @@ new FormModel {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTree" ) {
 					name: "tree1"
+					auxiliary() {
+						"JavaCodeGenerator.customCreateCode": "new JTree(MainFrame.getTreeModel());"
+					}
+					addEvent( new FormEvent( "javax.swing.event.TreeSelectionListener", "valueChanged", "tree1ValueChanged", true ) )
 				} )
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {

@@ -4,11 +4,12 @@
 
 package org.me.main.ui;
 
-import javax.imageio.ImageIO;
+import org.me.main.util.FileUtility;
+
 import javax.swing.*;
-import javax.swing.GroupLayout;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  * @author Allan
@@ -19,16 +20,52 @@ public class MainFrame extends JFrame {
         setData();
     }
 
-    private void setData() {
+    public void setData() {
         textPane1.setContentType("text/html");
-        textPane1.setText("<html>This text box has <b>bold text</b> in it!</html>");
+        textPane1.setText(new FileUtility().readFile("articles/Глава 1. Введение в Java/1. Первая программа на Java/Java.html"));
+
+        DefaultMutableTreeNode style = new DefaultMutableTreeNode("Style");
+        DefaultMutableTreeNode color1 = new DefaultMutableTreeNode("color1");
+        DefaultMutableTreeNode red = new DefaultMutableTreeNode("red");
+
+        style.add(color1);
+        color1.add(red);
+
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+//            classLoader.getResources();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static DefaultMutableTreeNode getTreeModel() {
+        DefaultMutableTreeNode style = new DefaultMutableTreeNode("Style");
+        DefaultMutableTreeNode color = new DefaultMutableTreeNode("color");
+        DefaultMutableTreeNode font = new DefaultMutableTreeNode("font");
+        style.add(color);
+        style.add(font);
+        DefaultMutableTreeNode green = new DefaultMutableTreeNode("green");
+        color.add(green);
+        return style;
+    }
+
+    private void tree1ValueChanged(TreeSelectionEvent e) {
+        new JTree();
+        System.out.println(tree1.getLastSelectedPathComponent().toString());
+    }
+
+    private void createUIComponents() {
+        // TODO: add custom component creation code here
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Allan
         scrollPane1 = new JScrollPane();
-        tree1 = new JTree();
+        tree1 = new JTree(MainFrame.getTreeModel());
         scrollPane3 = new JScrollPane();
         textPane1 = new JTextPane();
 
@@ -37,6 +74,9 @@ public class MainFrame extends JFrame {
 
         //======== scrollPane1 ========
         {
+
+            //---- tree1 ----
+            tree1.addTreeSelectionListener(e -> tree1ValueChanged(e));
             scrollPane1.setViewportView(tree1);
         }
 
