@@ -1,21 +1,19 @@
 package org.me.main.util;
 
+import lombok.SneakyThrows;
+import org.me.main.Main;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 import java.util.stream.Collectors;
-
-import static java.nio.file.Files.walk;
 
 public class FileUtility {
     public String readFile(String path) {
@@ -47,36 +45,7 @@ public class FileUtility {
         }
 
     }
-
-
-    // Get all paths from a folder that inside the JAR file
-    private List<Path> getPathsFromResourceJAR(String folder)
-            throws URISyntaxException, IOException {
-
-        List<Path> result;
-
-        // get path of the current running JAR
-        String jarPath = getClass().getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .toURI()
-                .getPath();
-        System.out.println("JAR Path :" + jarPath);
-
-        // file walks JAR
-        URI uri = URI.create("jar:file:" + jarPath);
-        try (FileSystem fs = FileSystems.newFileSystem(uri, Collections.emptyMap())) {
-            result = walk(fs.getPath(folder))
-                    .filter(Files::isRegularFile)
-                    .collect(Collectors.toList());
-        }
-
-        return result;
-
-    }
-
-    // print input stream
-    private static void printInputStream(InputStream is) {
+    public static void printInputStream(InputStream is) {
 
         try (InputStreamReader streamReader = new InputStreamReader(is, StandardCharsets.UTF_8);
              BufferedReader reader = new BufferedReader(streamReader)) {
@@ -91,6 +60,61 @@ public class FileUtility {
         }
 
     }
+    @SneakyThrows
+    public ArrayList<String> getResourcesFromJar() {
 
+        var pathList = new ArrayList<String>();
 
+        var path = "articles";
+        var jar = new JarFile(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        final Enumeration<JarEntry> entries = jar.entries();
+        while (entries.hasMoreElements()) {
+            var element = entries.nextElement();
+            var name = element.getName();
+            if (name.startsWith(path + "/")) {
+                if (name.endsWith(".html")) {
+                    pathList.add(name);
+                }
+            }
+        }
+        return pathList;
+    }
+
+    @SneakyThrows
+    public ArrayList<String> getResourcesFromJar(String path) {
+
+        var pathList = new ArrayList<String>();
+
+        var jar = new JarFile(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        final Enumeration<JarEntry> entries = jar.entries();
+        while (entries.hasMoreElements()) {
+            var element = entries.nextElement();
+            var name = element.getName();
+            if (name.startsWith(path + "/")) {
+                if (name.endsWith(".html")) {
+                    pathList.add(name);
+                }
+            }
+        }
+        return pathList;
+    }
+
+    @SneakyThrows
+    public ArrayList<String> getFolders(String path) {
+
+        var pathList = new ArrayList<String>();
+
+        var jar = new JarFile(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        final Enumeration<JarEntry> entries = jar.entries();
+        while (entries.hasMoreElements()) {
+            var element = entries.nextElement();
+            var name = element.getName();
+            if (name.startsWith(path + "/")) {
+                if (name.endsWith("html"))
+                pathList.add(name);
+
+            }
+        }
+        return pathList;
+    }
 }

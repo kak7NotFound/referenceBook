@@ -1,0 +1,47 @@
+
+<h2>Классы исключений</h2><div class="date">Последнее обновление: 23.04.2018</div>
+
+</div>
+
+<div style="margin-top:23px;margin-left:5px;">
+
+</div>
+
+<p>Базовым классом для всех исключений является класс <span class="b">Throwable</span>. От него уже наследуются два класса: <span class="b">Error</span>
+и <span class="b">Exception</span>. Все остальные классы являются производными от этих двух классов.</p>
+<p>Класс Error описывает внутренние ошибки в исполняющей среде Java. Программист имеет очень ограниченные возможности для обработки подобных ошибок.</p>
+<p>Собственно исключения наследуются от класса Exception. Среди этих исключений следует выделить класс <span class="b">RuntimeException</span>.
+RuntimeException является базовым классом для так называемой группы <span class="b">непроверяемых исключений</span> (unchecked exceptions) -
+компилятор не проверяет факт обработки таких исключений и их можно не указывать вместе с оператором throws в объявлении метода.
+Такие исключения являются следствием ошибок разработчика, например, неверное преобразование типов или выход за пределы массива.</p>
+<p>Некоторые из классов непроверяемых исключений:</p>
+<ul>
+<li><p><span class="b">ArithmeticException</span>: исключение, возникающее при делении на ноль</p></li>
+<li><p><span class="b">IndexOutOfBoundException</span>: индекс вне границ массива</p></li>
+<li><p><span class="b">IllegalArgumentException</span>: использование неверного аргумента при вызове метода</p></li>
+<li><p><span class="b">NullPointerException</span>: использование пустой ссылки</p></li>
+<li><p><span class="b">NumberFormatException</span>: ошибка преобразования строки в число</p></li>
+</ul>
+<p>Все остальные классы, образованные от класса Exception, называются проверяемыми исключениями (checked exceptions).</p>
+<p>Некоторые из классов проверяемых исключений:</p>
+<ul>
+<li><p><span class="b">CloneNotSupportedException</span>: класс, для объекта которого вызывается клонирование, не реализует интерфейс Cloneable</p></li>
+<li><p><span class="b">InterruptedException</span>: поток прерван другим потоком</p></li>
+<li><p><span class="b">ClassNotFoundException</span>: невозможно найти класс</p></li>
+</ul>
+<p>Подобные исключения обрабатываются с помощью конструкции try..catch. Либо можно передать обработку методу, который будет вызывать данный метод,
+указав исключения после оператора throws:</p>
+<div><div id="highlighter_961279" class="syntaxhighlighter  java"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java keyword">public</code> <code class="java plain">Person clone() </code><code class="java keyword">throws</code> <code class="java plain">CloneNotSupportedException{</code></div><div class="line number2 index1 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number3 index2 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">Person p = (Person) </code><code class="java keyword">super</code><code class="java plain">.clone();</code></div><div class="line number4 index3 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">return</code> <code class="java plain">p;</code></div><div class="line number5 index4 alt2"><code class="java plain">}</code></div></div></td></tr></tbody></table></div></div>
+<p>В итоге получается следующая иерархия исключений:</p>
+
+<p>Поскольку все классы исключений наследуются от класса Exception, то все они наследуют ряд его методов, которые позволяют получить информацию о
+характере исключения. Среди этих методов отметим наиболее важные:</p>
+<ul>
+<li><p>Метод <span class="b">getMessage()</span> возвращает сообщение об исключении</p></li>
+<li><p>Метод <span class="b">getStackTrace()</span> возвращает массив, содержащий трассировку стека исключения</p></li>
+<li><p>Метод <span class="b">printStackTrace()</span> отображает трассировку стека</p></li>
+</ul>
+<p>Например:</p>
+<div><div id="highlighter_498959" class="syntaxhighlighter  java"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java keyword">try</code><code class="java plain">{</code></div><div class="line number2 index1 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">int</code> <code class="java plain">x = </code><code class="java value">6</code><code class="java plain">/</code><code class="java value">0</code><code class="java plain">;</code></div><div class="line number3 index2 alt2"><code class="java plain">}</code></div><div class="line number4 index3 alt1"><code class="java keyword">catch</code><code class="java plain">(Exception ex){</code></div><div class="line number5 index4 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number6 index5 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">ex.printStackTrace();</code></div><div class="line number7 index6 alt2"><code class="java plain">}</code></div></div></td></tr></tbody></table></div></div>
+<div style="margin-top:25px;clear:both;">
+</div>

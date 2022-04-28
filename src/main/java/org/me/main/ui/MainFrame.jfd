@@ -4,25 +4,36 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :::p, comp scrollPane1:::p:182:p, space :::p, comp scrollPane3::::603:x, space :::p}}"
-			"$verticalGroup": "par l {seq l {space :::p, par l:::p {comp scrollPane1::::494:x, comp scrollPane3::::494:x}, space ::3:x}}"
+			"$horizontalGroup": "par l {seq {space :::p, par l:::p {comp scrollPane1::::182:x, comp button1::::182:x}, space :p:12:p, comp scrollPane3::::597:x, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :::p, par l {comp scrollPane3:::p:494:p, seq {comp scrollPane1:::p:469:p, space :::p, comp button1:::p:19:p}}, space ::3:x}}"
 		} ) {
 			name: "this"
+			"title": "Справочник по Java | Долинский Родион 523пи-4"
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTree" ) {
 					name: "tree1"
+					"cellRenderer": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					auxiliary() {
 						"JavaCodeGenerator.customCreateCode": "new JTree(MainFrame.getTreeModel());"
+						"JavaCodeGenerator.variableModifiers": 1
 					}
 					addEvent( new FormEvent( "javax.swing.event.TreeSelectionListener", "valueChanged", "tree1ValueChanged", true ) )
 				} )
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane3"
+				auxiliary() {
+					"JavaCodeGenerator.variableModifiers": 1
+				}
 				add( new FormComponent( "javax.swing.JTextPane" ) {
 					name: "textPane1"
 				} )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "Открыть тест"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1Event", true ) )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

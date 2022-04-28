@@ -1,0 +1,57 @@
+JFDML JFormDesigner: "7.0.5.1.409" Java: "11.0.14.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :p:37:p, par l {seq {comp button2:::p:129:p, space :p:27:p, comp button1:::p:129:p}, par t:l::p {comp scrollPane1::l::271:x, seq l {space :p:11:p, par l:::p {comp radioButton1::l:::x, comp radioButton2::l:::x, comp radioButton3::l::260:x}}}}, space ::46:x}}"
+			"$verticalGroup": "par l {seq t {space :::p, comp scrollPane1::::58:x, space :::p, comp radioButton1:::p:32:p, space :::p, comp radioButton2:::p:32:p, space :::p, comp radioButton3:::p:34:p, space :::p, par b {comp button2::b:p::p, comp button1::b:p::p}, space :p:22:p}}"
+		} ) {
+			name: "this"
+			"title": "Тест"
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "Далее"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1Event", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "Назад"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button2", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButton1"
+				"text": "text"
+				auxiliary() {
+					"JavaCodeGenerator.variableModifiers": 1
+				}
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "radioButton1", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButton2"
+				"text": "text"
+				auxiliary() {
+					"JavaCodeGenerator.variableModifiers": 1
+				}
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "radioButton2", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButton3"
+				"text": "text"
+				auxiliary() {
+					"JavaCodeGenerator.variableModifiers": 1
+				}
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "radioButton3", true ) )
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "textArea1"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 10, 15 )
+			"size": new java.awt.Dimension( 370, 270 )
+		} )
+	}
+}
